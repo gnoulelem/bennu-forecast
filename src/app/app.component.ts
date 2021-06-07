@@ -15,14 +15,15 @@ export class AppComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    if(this.isNight()) {
+    if(this.isNight() == true) {
       this.theme = 'dark-theme';
     }else {
       this.theme = 'light-theme';
     }
 
     this.initializeTheme();
-
+    
+    
   }
 
   initializeTheme = (): void => 
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   isNight() {
-    if(this.getCurrentHour() >= 18 && this.getCurrentHour() <= 6) {
+    if(this.getCurrentHour() >= 18 || this.getCurrentHour() <= 6) {
       return true;
     }else {
       return false;
