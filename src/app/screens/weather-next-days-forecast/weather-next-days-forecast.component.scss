@@ -1,0 +1,46 @@
+.nivo-c{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.min-t{
+    position: relative;
+    width: 40px;
+
+}
+.max-t{
+    position: relative;
+    width: 40px;
+}
+.slide{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    position: relative;
+    width: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.bco{
+    background-color: red;
+    width: 100%;
+    border-radius: 10px;
+    &:before{
+        content: ' ';
+        position: absolute;
+        background-color: #d2e4f7;
+        width: 50%;
+        height: 20px;
+        border-radius: 10px 0px 0px 10px;
+
+    }
+}
+.bande {
+    width: 63px;
+    height: 20px;
+    position: relative;
+    
+}

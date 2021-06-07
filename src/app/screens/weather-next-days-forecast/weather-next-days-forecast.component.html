@@ -1,0 +1,100 @@
+<div class="container">
+    <p (click)="goToIndex()"><i class="h5 bi bi-chevron-left"></i></p>
+    <p class="h4">Next <font class="fw-bold">4 days</font></p>
+
+    <div class="mt-4 d-flex justify-content-center card weather-next-card shadow p-3" *ngIf="firstDay">
+        <div class="weather-next-card-content">
+            <div>
+                <p>{{ firstDay.Date|date }} <img src="assets/images/weathericons/{{ isNight() ? firstDay.Night.Icon :  firstDay.Day.Icon }}-s.png" width="50"></p>
+            </div>
+            <div>
+                <font class="fw-bold h5">{{ firstDay.Temperature.Maximum.Value }}°C</font> &nbsp; <font class="color-gray h6">{{ firstDay.Temperature.Minimum.Value }}°C</font>
+            </div>
+        </div>
+        <div class="row weather-index-small-text fw-bold mt-3">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">Wind</div>
+                    <div class="col-6 color-gray">{{ isNight() ? firstDay.Night.Wind.Speed.Value+' '+firstDay.Night.Wind.Speed.Unit : firstDay.Day.Wind.Speed.Value+' '+firstDay.Night.Wind.Speed.Unit }}</div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">Humidity</div>
+                    <div class="col-6 color-gray">55%</div>
+                </div>
+            </div> 
+            <div class="col-6 mt-4">
+                <div class="row">
+                    <div class="col-6">Visibility</div>
+                    <div class="col-6 color-gray">25km</div>
+                </div>
+            </div>
+            <div class="col-6 mt-4">
+                <div class="row">
+                    <div class="col-6">UV</div>
+                    <div class="col-6 color-gray">{{ firstDay.AirAndPollen[5].Value }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5" *ngIf="otherDays">
+        <table class="table table-borderless">
+            <tbody>
+              <tr *ngFor="let day of otherDays">
+                <td class="weather-index-small-text">
+                    {{ day.Date|date }}
+                </td>
+                <td>
+                    <img src="assets/images/weathericons/{{ isNight() ? day.Night.Icon : day.Day.Icon }}-s.png" width="50">
+                </td>
+                <td>
+
+                    <div class="nivo-c">
+                        <font class="min-t color-gray">{{ day.Temperature.Minimum.Value }}°C</font> 
+
+                        <div *ngIf="day.Temperature.Minimum.Value >= 25 && day.Temperature.Maximum.Value > 25" class="card" [ngStyle]="{
+                            'border': 'none',
+                            'borderRadius': '10px 10px 10px 10px',
+                            'width': (day.Temperature.Maximum.Value - day.Temperature.Minimum.Value)*3+'px',
+                            'height': '20px',
+                            'backgroundColor': '#f74512',
+                            'marginLeft': (day.Temperature.Minimum.Value - 14 )*3+'px',
+                            'marginRight': 35 - day.Temperature.Maximum.Value+'px'
+                        }">
+                        </div>
+
+                        <div *ngIf="day.Temperature.Maximum.Value < 25 && day.Temperature.Minimum.Value < 25" class="card" [ngStyle]="{
+                            'border': 'none',
+                            'borderRadius': '10px 10px 10px 10px',
+                            'width': (day.Temperature.Maximum.Value - day.Temperature.Minimum.Value)*3+'px',
+                            'height': '20px',
+                            'backgroundColor': '#d2e4f7',
+                            'marginLeft': (day.Temperature.Minimum.Value - 14 )*3+'px',
+                            'marginRight': 35 - day.Temperature.Maximum.Value+'px'
+                        }">
+                        </div>
+
+                        <div *ngIf="day.Temperature.Minimum.Value < 25 && day.Temperature.Maximum.Value > 25" class="card warm-cold" [ngStyle]="{
+                            'border': 'none',
+                            'borderRadius': '10px 10px 10px 10px',
+                            'width': (day.Temperature.Maximum.Value - day.Temperature.Minimum.Value)*3+'px',
+                            'height': '20px',
+                            'background': 'linear-gradient(to right, #d2e4f7, #f74512)',
+                            'marginLeft': (day.Temperature.Minimum.Value - 14 )*3+'px',
+                            'marginRight': 35 - day.Temperature.Maximum.Value+'px'
+                        }">
+                        </div>
+                        
+
+                        <font class="max-t">{{ day.Temperature.Maximum.Value }}°C</font>
+                    </div>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+    </div>
+</div>
